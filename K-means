@@ -1,0 +1,17 @@
+data<- rbind(matrix(rnorm(100, sd = 0.3), ncol = 2),matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2))
+colnames(data) <- c("x", "y")
+
+km<-function(data,center){
+  kj<-matrix(ncol=center)
+  n<-length(data)
+  k<-(n/center)
+  l1<-matrix(ncol=center)
+  for(i in 1:center){
+     l1<-sample(data,k)
+     kj<-append(l1,kj,after = center)
+     data<-data[-k]
+  }
+  return(kj)
+}
+km(data,4)
+
