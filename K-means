@@ -2,9 +2,9 @@ data<- rbind(matrix(rnorm(100, sd = 0.3), ncol = 2),matrix(rnorm(100, mean = 1, 
 colnames(data) <- c("x", "y")
 data
 km<-function(data,center){
-  kj<-matrix()
+  kj<-data.frame()
   l1<-sample(data,center)
-  kj<-list(l1)
+  kj<-data.frame(l1)
   return(kj)
 }
 km(data,4)
