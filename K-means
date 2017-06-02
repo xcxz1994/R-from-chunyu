@@ -1,10 +1,23 @@
-data<- rbind(matrix(rnorm(100, sd = 0.3), ncol = 2),matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2))
-colnames(data) <- c("x", "y")
-data
+srcdata<- rbind(matrix(rnorm(100, sd = 0.3), ncol = 2),matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2))
+colnames(srcdata) <- c("x", "y")
+srcdata
+
 km<-function(data,center){
-  kj<-data.frame()
+  n<-length(data)
+  x<-(n/center)
   l1<-sample(data,center)
-  kj<-data.frame(l1)
-  return(kj)
+  
+  for(j in 1:center){
+    for(i in 1:n){
+      juli<-sqrt((data[i]-l1[j])^2)
+      kj<-unlist(append(juli,kj,after=n))
+    }
+    
+    kj<-order(kj)
+    cu<-kj[1:x]
+    kj<-data.frame(juli,cu)
+    kj<-unlist(append(cu,kj,after = center))
+  }
+  return(list(kj))
 }
-km(data,4)
+km(srcdata,4)
